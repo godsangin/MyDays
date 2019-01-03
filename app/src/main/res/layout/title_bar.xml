@@ -38,6 +38,7 @@
             android:layout_gravity="center"/>
     </LinearLayout>
     <ImageView
+        android:id="@+id/menu_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_menu_white_24dp"

@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -21,81 +22,86 @@ import java.util.ArrayList;
 public class StatisticActivity extends AppCompatActivity {
 
     PieChart pieChart;
+    Button btn_daily, btn_weekly, btn_monthly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic);
 
+        btn_daily = (Button) findViewById(R.id.btn_daily);
+        btn_weekly = (Button) findViewById(R.id.btn_weekly);
+        btn_monthly = (Button) findViewById(R.id.btn_monthly);
+
         pieChart = (PieChart)findViewById(R.id.piechart);
 
+        btn_daily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_chart(0);
+            }
+        });
+        btn_weekly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_chart(1);
+            }
+        });
+        btn_monthly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_chart(2);
+            }
+        });
+
+        btn_daily.callOnClick();
+    }
+
+    public void show_chart(int i){
+        switch (i){
+            case 0://daily
+                make_chart(new ArrayList<PieEntry>(), "일간");
+                break;
+            case 1://weekly
+                make_chart(new ArrayList<PieEntry>(), "주간");
+                break;
+            case 2://monthly
+                make_chart(new ArrayList<PieEntry>(), "월간");
+                break;
+        }
+    }
+
+    public void make_chart(ArrayList<PieEntry> pie_entry, String data_set){
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5,10,5,5);
 
         pieChart.setDragDecelerationFrictionCoef(0.95f);
-        ///
         pieChart.setTouchEnabled(false);
-        ///
 
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColor(Color.WHITE);
 
+        // 데이터 넣을 부분
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
 
-//        yValues.add(new PieEntry(34f,"Japen"));
-//        yValues.add(new PieEntry(23f,"USA"));
-//        yValues.add(new PieEntry(14f,"UK"));
-//        yValues.add(new PieEntry(35f,"India"));
-//        yValues.add(new PieEntry(40f,"Russia"));
-//        yValues.add(new PieEntry(40f,"Korea"));
+        yValues.add(new PieEntry(1f,"운동"));
+        yValues.add(new PieEntry(1f,"휴식"));
+        yValues.add(new PieEntry(1f,"공부"));
+        //
 
-        yValues.add(new PieEntry(1f,"1"));
-        yValues.add(new PieEntry(1f,"2"));
-        yValues.add(new PieEntry(1f,"3"));
-        yValues.add(new PieEntry(1f,"4"));
-        yValues.add(new PieEntry(1f,"5"));
-        yValues.add(new PieEntry(1f,"6"));
-        yValues.add(new PieEntry(1f,"7"));
-        yValues.add(new PieEntry(1f,"8"));
-        yValues.add(new PieEntry(1f,"9"));
-        yValues.add(new PieEntry(1f,"10"));
-        yValues.add(new PieEntry(1f,"11"));
-        yValues.add(new PieEntry(1f,"12"));
-        yValues.add(new PieEntry(1f,"13"));
-        yValues.add(new PieEntry(1f,"14"));
-        yValues.add(new PieEntry(1f,"15"));
-        yValues.add(new PieEntry(1f,"16"));
-        yValues.add(new PieEntry(1f,"17"));
-        yValues.add(new PieEntry(1f,"18"));
-        yValues.add(new PieEntry(1f,"19"));
-        yValues.add(new PieEntry(1f,"20"));
-        yValues.add(new PieEntry(1f,"21"));
-        yValues.add(new PieEntry(1f,"22"));
-        yValues.add(new PieEntry(1f,"23"));
-        yValues.add(new PieEntry(1f,"24"));
-
-
-//        Description description = new Description();
-//        description.setText("세계 국가"); //라벨
-//        description.setTextSize(15);
-//        pieChart.setDescription(description);
+        int[] myColor = ColorTemplate.JOYFUL_COLORS;
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
-        PieDataSet dataSet = new PieDataSet(yValues,"Countries");
+        PieDataSet dataSet = new PieDataSet(yValues,data_set);
         dataSet.setSliceSpace(0.1f); // 간격
         dataSet.setSelectionShift(5f);
 
-        ///
-        int[] myColor = {Color.rgb(0xAA,0xAA,0xAA)};
-        //데이터 컬러 설정
         dataSet.setColors(myColor);
-        ///
-//        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);
     }

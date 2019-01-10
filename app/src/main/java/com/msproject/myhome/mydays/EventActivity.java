@@ -45,7 +45,7 @@ public class EventActivity extends AppCompatActivity {
     //Cursor 해결
     private void setTable(SQLiteDatabase DB,String date,int quarterNo){
         TextView eventTime0 = findViewById(R.id.eventTime0);
-        TextView eventTime1 = findViewById(R.id.eventTime1);
+        //TextView eventTime1 = findViewById(R.id.eventTime1);
         TextView eventTime2 = findViewById(R.id.eventTime2);
         TextView eventTime3 = findViewById(R.id.eventTime3);
         TextView eventTime4 = findViewById(R.id.eventTime4);

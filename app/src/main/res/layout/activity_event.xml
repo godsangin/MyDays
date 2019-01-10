@@ -47,10 +47,10 @@
                 android:layout_width="1dp">
 
             </view>
+
             <TextView
                 android:layout_gravity="center"
-                android:text="content1"
-                ></TextView>
+                android:text="conten1"></TextView>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"

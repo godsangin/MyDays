@@ -47,10 +47,10 @@
                 android:layout_width="1dp">
 
             </view>
+
             <TextView
                 android:layout_gravity="center"
-                android:text="content1"
-                ></TextView>
+                android:text="conten1"></TextView>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             >
 
             <TextView
-                android:id="@+id/eventTim1"
+                android:id="@+id/eventTime1"
                 android:layout_width="60dp"
                 android:layout_gravity="center"
                 android:text="00:00 ~ 01:00" />

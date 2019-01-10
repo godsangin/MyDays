@@ -17,15 +17,26 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     ImageView menuButton;
+    PieChart pieChart;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuButton = findViewById(R.id.menu_bt);
-
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,24 +51,82 @@ public class MainActivity extends AppCompatActivity {
                 p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getItemId() == R.id.statistic_graph){//StatisicActivity로 intent
-
-                        }else if(item.getItemId() == R.id.setting){
+                        if (item.getItemId() == R.id.statistic_graph) {//StatisicActivity로 intent
+                            Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
+                            startActivity(intent);
+                        } else if (item.getItemId() == R.id.setting) {
                             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                             startActivity(intent);
 
-                        }else if(item.getItemId() == R.id.remove_ad){//광고제거
+                        } else if (item.getItemId() == R.id.remove_ad) {//광고제거
 
                         }
-
                         return false;
                     }
                 });
-
                 p.show(); // 메뉴를 띄우기
-
             }
         });
+
+
+        pieChart = (PieChart)findViewById(R.id.piechart);
+
+        //pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5,10,5,5);
+
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setTouchEnabled(false);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+
+        ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
+
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+
+        Description description = new Description();
+        description.setText("뭐했니"); //라벨
+        description.setTextSize(15);
+        pieChart.setDescription(description);
+
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
+
+        PieDataSet dataSet = new PieDataSet(yValues,"?");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(Color.rgb(0,0,0));
+
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.YELLOW);
+
+        pieChart.setData(data);
+
 
 
     }

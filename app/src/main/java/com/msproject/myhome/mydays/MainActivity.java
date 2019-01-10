@@ -65,19 +65,19 @@ public class MainActivity extends AppCompatActivity {
                 return degree;
             }
             private int getArea(int degree){
-                if (degree >= 0 && degree < 60){
+                if (degree >= 0 && degree < 90){
                     return 1;
-                } else if (degree >= 60 && degree < 120){
+                } else if (degree >= 90 && degree < 180){
                     return 2;
-                } else if (degree >= 120 && degree < 180){
+                } else if (degree >= 180 && degree < 270){
                     return 3;
-                } else if (degree >= 180 && degree < 240){
+                } else if (degree >= 270 && degree < 360){
                     return 4;
-                } else if (degree >= 240 && degree < 300){
+                } /*else if (degree >= 240 && degree < 300){
                     return 5;
                 } else if (degree >= 300 && degree < 360){
                     return 6;
-                } else {
+                }*/ else {
                     return 0;
                 }
             }

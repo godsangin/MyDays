@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class StatisticActivity extends AppCompatActivity {
 
     PieChart pieChart;
+
     Button btn_daily, btn_weekly, btn_monthly;
 
     @Override
@@ -34,6 +35,7 @@ public class StatisticActivity extends AppCompatActivity {
         btn_monthly = (Button) findViewById(R.id.btn_monthly);
 
         pieChart = (PieChart)findViewById(R.id.piechart);
+
 
         btn_daily.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,16 +17,26 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-    LinearLayout schedulerView;
     ImageView menuButton;
+    PieChart pieChart;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuButton = findViewById(R.id.menu_bt);
-
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,119 +51,83 @@ public class MainActivity extends AppCompatActivity {
                 p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getItemId() == R.id.statistic_graph){//StatisicActivity로 intent
-
-                        }else if(item.getItemId() == R.id.setting){
+                        if (item.getItemId() == R.id.statistic_graph) {//StatisicActivity로 intent
+                            Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
+                            startActivity(intent);
+                        } else if (item.getItemId() == R.id.setting) {
                             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                             startActivity(intent);
 
-                        }else if(item.getItemId() == R.id.remove_ad){//광고제거
+                        } else if (item.getItemId() == R.id.remove_ad) {//광고제거
 
                         }
-
                         return false;
                     }
                 });
-
                 p.show(); // 메뉴를 띄우기
-
             }
         });
 
-        schedulerView.setBackground(new ShapeDrawable(new OvalShape()));
-        schedulerView.setClipToOutline(true);
+        pieChart = (PieChart)findViewById(R.id.piechart);
 
-        schedulerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                float touchX = event.getX();
-                float touchY = event.getY();
+        //pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5,10,5,5);
 
-                int action = event.getAction();
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
 
-                if (action == MotionEvent.ACTION_OUTSIDE){
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setTouchEnabled(false);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
 
-                    return false;
-                } else if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
-                    int degree = getDegree(touchX, touchY);
-                    int area = getArea(degree);
+        ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
 
-                    selectMenu(area);
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
+        yValues.add(new PieEntry(1f,""));
 
-                } else if (action == MotionEvent.ACTION_UP){
+        Description description = new Description();
+        description.setText("뭐했니"); //라벨
+        description.setTextSize(15);
+        pieChart.setDescription(description);
 
-                    return false;
-                }
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
 
-                return true;
-            }
-            private int getDegree(float x, float y){
-                int centerX = schedulerView.getWidth() / 2;
-                int centerY = schedulerView.getHeight() / 2;
+        PieDataSet dataSet = new PieDataSet(yValues,"?");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(Color.rgb(0,0,0));
 
-                float calcX = x - centerX;
-                float calcY = y - centerY;
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.YELLOW);
 
-                double tan = Math.atan2(calcY, calcX);
-
-                double result = 180 * tan / Math.PI;
-                int degree = - ((int) Math.round(result));
-
-                if (degree < 0){
-                    degree = 360 + degree;
-                }
-
-                return degree;
-            }
-            private int getArea(int degree){
-                if (degree >= 0 && degree < 90){
-                    return 1;
-                } else if (degree >= 90 && degree < 180){
-                    return 2;
-                } else if (degree >= 180 && degree < 270){
-                    return 3;
-                } else if (degree >= 270 && degree < 360){
-                    return 4;
-                } /*else if (degree >= 240 && degree < 300){
-                    return 5;
-                } else if (degree >= 300 && degree < 360){
-                    return 6;
-                }*/ else {
-                    return 0;
-                }
-            }
-        });
-    }
-
-    private void selectMenu(int areaCode){
-
-        switch(areaCode){
-
-            case 0:
-                Log.d("code==", "0");
-                break;
-            case 1:
-                Log.d("code==", "1");
-                break;
-            case 2:
-                Log.d("code==", "2");
-                break;
-            case 3:
-                Log.d("code==", "3");
-                break;
-            case 4:
-                Log.d("code==", "4");
-                break;
-            case 5:
-                Log.d("code==", "5");
-                break;
-            case 6:
-                Log.d("code==", "6");
-                break;
+        pieChart.setData(data);
 
 
 
-        }
     }
 
 }

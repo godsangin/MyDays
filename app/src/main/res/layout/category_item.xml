@@ -5,13 +5,16 @@
     android:orientation="horizontal"
     android:padding="8dp">
     <TextView
+        android:id="@+id/category_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="카테고리명"
         android:layout_weight="1"/>
     <LinearLayout
+        android:id="@+id/color_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#456788"></LinearLayout>
+        android:background="#456788"
+        android:orientation="vertical"></LinearLayout>
 </LinearLayout>

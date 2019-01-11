@@ -1,5 +1,6 @@
 package com.msproject.myhome.mydays;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
@@ -31,12 +32,21 @@ public class MainActivity extends AppCompatActivity {
     ImageView menuButton;
     PieChart pieChart;
 
+    @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuButton = findViewById(R.id.menu_bt);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            // 21 버전 이상일 때
+            //상단 바 색상 변경
+            getWindow().setStatusBarColor(getColor(R.color.colorTitleBar));
+        }
+
+
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override

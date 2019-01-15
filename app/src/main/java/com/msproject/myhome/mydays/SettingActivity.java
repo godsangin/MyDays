@@ -36,14 +36,7 @@ public class SettingActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.setting_recycler_view);
         context = this;
 
-        ImageView backButton = titleBar.findViewById(R.id.back_bt);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButtonEnable();
 
         ArrayList<SettingItem> mItems = setItems();
 
@@ -52,6 +45,17 @@ public class SettingActivity extends AppCompatActivity {
         recyclerView.setAdapter(settingRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    public void backButtonEnable(){
+        ImageView backButton = titleBar.findViewById(R.id.back_bt);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public ArrayList<SettingItem> setItems(){//설정에 필요한게 더 생길 경우 추가

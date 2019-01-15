@@ -1,10 +1,16 @@
 package com.msproject.myhome.mydays;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +24,28 @@ import static android.graphics.Color.*;
 
 public class CategoryGridAdapter extends BaseAdapter {
     ArrayList<Category> categories;
+    Context context;
+    CategoryGridAdapter gridAdapter;
 
-    public CategoryGridAdapter(ArrayList<Category> categories){
+    public CategoryGridAdapter(ArrayList<Category> categories, Context context){
         this.categories = categories;
+        this.context = context;
+        gridAdapter = this;
     }
     @Override
     public int getCount() {
         return categories.size();
+    }
+
+    public void add(Category category){
+        categories.add(category);
+    }
+    public void modify(Category category, int index){
+        categories.set(index, category);
+    }
+
+    public void delete(int index){
+        categories.remove(index);
     }
 
     @Override
@@ -45,26 +66,10 @@ public class CategoryGridAdapter extends BaseAdapter {
         LinearLayout colorView = view.findViewById(R.id.color_view);
 
         categoryName.setText(categories.get(position).getCategoryName());
-        Log.d("colorInteger==", hexToInteger(categories.get(position).getColor())+ " ");
+
         colorView.setBackgroundColor(Color.parseColor(categories.get(position).getColor()));
+
         return view;
     }
 
-    public int hexToInteger(String str){
-        int hex = 0;
-        int hexIndex = 1;
-        for(int i = str.length() - 1; i > 0; i--){
-            char c = str.charAt(i);
-            int tmp = 0;
-            if(c > 96){//소문자
-                tmp = 10 + 97 - c;
-            }
-            else{//숫자
-                tmp = Integer.parseInt(String.valueOf(c));
-            }
-            hex += hexIndex * tmp;
-            hexIndex *= 16;
-        }
-        return hex;
-    }
 }

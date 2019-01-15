@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
-public class UpdateCategoryDialog extends Dialog implements View.OnClickListener, ColorPickerDialogListener {
+public class UpdateCategoryDialog extends Dialog implements View.OnClickListener{
     private static final int LAYOUT = R.layout.dialog_update_category;
     private Context context;
     private EditText categoryEditText;
@@ -25,9 +25,23 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
     private String pickedColor;
     private static final int DIALOG_ID = 0;
 
+    private MyDialogListener dialogListener;
+    private boolean isModify;//ture이면 버튼을 수정으로 변경, textView를 readOnly로!
+    private int modifyIndex;
+    private Category modifyCategory;
+
     public UpdateCategoryDialog(Context context) {
         super(context);
         this.context = context;
+        this.pickedColor = "#567789";
+    }
+
+    public UpdateCategoryDialog(Context context, Category category, int index){//수정인지 판별 필요
+        super(context);
+        this.context = context;
+        this.isModify = true;
+        this.modifyIndex = index;
+        this.modifyCategory = category;
     }
 
     public String getPickedColor() {
@@ -36,7 +50,11 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
 
     public void setPickedColor(String pickedColor) {
         this.pickedColor = pickedColor;
-        categoryColorSetectButton.setBackgroundColor(Color.parseColor("#" + pickedColor));
+        categoryColorSetectButton.setBackgroundColor(Color.parseColor(this.pickedColor));
+    }
+
+    public void setDialogListener(MyDialogListener myDialogListener){
+        this.dialogListener = myDialogListener;
     }
 
     @Override
@@ -44,14 +62,18 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
 
-
         categoryEditText = findViewById(R.id.category_edittext);
         categoryColorSetectButton = findViewById(R.id.color_selec_bt);
         submitButton = findViewById(R.id.submit_bt);
         cancelButton = findViewById(R.id.cancel_bt);
 
+        if(isModify){
+            submitButton.setText("수정");
+            categoryEditText.setText(modifyCategory.getCategoryName());
+            categoryEditText.setEnabled(false);
+            setPickedColor(modifyCategory.getColor());
+        }
         submitButton.setOnClickListener(this);
-
         cancelButton.setOnClickListener(this);
         categoryColorSetectButton.setOnClickListener(this);
     }
@@ -60,7 +82,20 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.submit_bt://db업데이트
+                String categoryName = categoryEditText.getText().toString();
+                if(categoryName.equals("")){
+                    Toast.makeText(context, "카테고리의 이름을 입력해주세요.", Toast.LENGTH_SHORT);
+                    return;
+                }
+                if(isModify){
 
+                    dialogListener.onModifyClicked(new Category(categoryName, pickedColor), modifyIndex);
+                }
+                else{
+
+                    dialogListener.onPostClicked(new Category(categoryName, pickedColor));
+                }
+                dismiss();
                 break;
             case R.id.cancel_bt:
                 dismiss();
@@ -79,29 +114,4 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onColorSelected(int dialogId, int color) {
-        switch (dialogId){
-            case DIALOG_ID:
-                final int invertColor = ~color;
-                final String hexColor = String.format("%X", color);
-                final String hexInvertColor = String.format("%X", invertColor);
-                if (BuildConfig.DEBUG) {
-                    Log.d("color==", "id " + dialogId + " c: " + hexColor + " i:" + hexInvertColor);
-                }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        pickedColor = hexInvertColor;
-                    }
-                }).start();
-                break;
-        }
-
-    }
-
-    @Override
-    public void onDialogDismissed(int dialogId) {
-
-    }
 }

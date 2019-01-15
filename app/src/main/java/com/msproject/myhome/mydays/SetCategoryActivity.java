@@ -1,6 +1,9 @@
 package com.msproject.myhome.mydays;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,8 +15,10 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
@@ -25,7 +30,11 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
     FloatingActionButton fab;
     Context context;
     private final int DIALOG_ID = 0;
-    UpdateCategoryDialog dialog;
+    UpdateCategoryDialog Udialog;
+    DBHelper dbHelper;
+    CategoryGridAdapter gridAdapter;
+    ArrayList<Category> categories;
+    final CharSequence[] items = {"색상 변경", "삭제", "취소"};
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -41,7 +50,8 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
         titleBar = findViewById(R.id.title_bar);
         gridView = findViewById(R.id.category_gridview);
         fab = findViewById(R.id.fab);
-
+        dbHelper = new DBHelper(context, "CATEGORY.db", null, 1);
+//        dbHelper.clearDB();
         ImageView backButton = titleBar.findViewById(R.id.back_bt);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -51,21 +61,95 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
             }
         });
 
-        ArrayList<Category> categories = initCategories();
-        CategoryGridAdapter gridAdapter = new CategoryGridAdapter(categories);
+        categories = initCategories();
+        gridAdapter = new CategoryGridAdapter(categories, this.context);
         gridView.setAdapter(gridAdapter);
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+                builder.setTitle("수행할 작업을 선택하세요")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0://수정
+                                        Udialog = new UpdateCategoryDialog(context, (Category) gridAdapter.getItem(position), position);
+                                        Display display = ((Activity)context).getWindowManager().getDefaultDisplay();
+                                        Point size = new Point();
+                                        display.getSize(size);
+                                        Udialog.setDialogListener(new MyDialogListener() {
+                                            @Override
+                                            public void onPostClicked(Category category) {
 
+                                            }
+                                            @Override
+                                            public void onModifyClicked(Category category, int index) {
+                                                dbHelper.update(category.getCategoryName(), category.getColor());
+                                                gridAdapter.modify(category, index);
+                                                gridAdapter.notifyDataSetChanged();
+                                            }
+                                            @Override
+                                            public void onNegativeClicked() {
+
+                                            }
+                                        });
+                                        dialog.dismiss();
+                                        Udialog.show();
+                                        Udialog.setCancelable(true);
+                                        Window window = Udialog.getWindow();
+                                        int x = (int)(size.x * 0.8f);
+                                        int y = (int)(size.y * 0.8f);
+                                        window.setLayout(x,y);
+                                        break;
+                                    case 1://삭제
+                                        dbHelper.delete(((Category)(gridAdapter.getItem(position))).getCategoryName());
+                                        gridAdapter.delete(position);
+                                        gridAdapter.notifyDataSetChanged();
+                                        dialog.dismiss();
+                                        Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 2:
+                                        dialog.dismiss();
+                                }
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                return false;
+            }
+        });
+        
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new UpdateCategoryDialog(context);
+                Udialog = new UpdateCategoryDialog(context);
                 Display display = getWindowManager().getDefaultDisplay();
                 Point size = new Point();
                 display.getSize(size);
-                dialog.show();
-                dialog.setCancelable(true);
-                Window window = dialog.getWindow();
+                Udialog.setDialogListener(new MyDialogListener() {
+                    @Override
+                    public void onPostClicked(Category category) {
+                        dbHelper.insert(category.getCategoryName(), category.getColor());
+                        gridAdapter.add(category);
+                        gridAdapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onModifyClicked(Category category, int index) {
+
+                    }
+
+                    @Override
+                    public void onNegativeClicked() {
+
+                    }
+                });
+                Udialog.show();
+                Udialog.setCancelable(true);
+                Window window = Udialog.getWindow();
                 int x = (int)(size.x * 0.8f);
                 int y = (int)(size.y * 0.8f);
 
@@ -80,7 +164,9 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
         categories.add(new Category("공부", "#455678"));
         categories.add(new Category("운동", "#fda967"));
         categories.add(new Category("휴식", "#5f5f5f"));
-
+        if(dbHelper.getResult() != null){
+            categories = dbHelper.getResult();
+        }
         return categories;
     }
 
@@ -94,7 +180,7 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                 if (BuildConfig.DEBUG) {
                     Log.d("color==", "id " + dialogId + " c: " + hexColor + " i:" + hexInvertColor);
                 }
-                dialog.setPickedColor(hexColor);
+                Udialog.setPickedColor("#" + hexColor);
                 break;
         }
 

@@ -9,15 +9,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java" line="24" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryDBHelper.java" line="24" />
   </component>
   <component name="CMakeSettings">
     <configurations />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22ca4f0a-a0a5-4909-8f5f-b4a2360177b1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/MyDialogListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -27,8 +25,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryGridAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryGridAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryDBHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SetCategoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SetCategoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java" afterDir="false" />
     </list>
     <ignored path=".idea/" />
@@ -58,13 +57,17 @@
       <file leaf-file-name="SetCategoryActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SetCategoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="107" column="57" selection-start-line="107" selection-start-column="57" selection-end-line="107" selection-end-column="57" />
+            <state relative-caret-position="-1927">
+              <caret line="76" column="5" lean-forward="true" selection-start-line="67" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
               <folding>
-                <element signature="e#2229#4462#0" expanded="true" />
-                <element signature="e#2569#4406#0" expanded="true" />
-                <element signature="e#4405#4406#0" expanded="true" />
-                <element signature="e#4461#4462#0" expanded="true" />
+                <element signature="e#2313#2455#0" expanded="true" />
+                <element signature="e#2454#2455#0" expanded="true" />
+                <element signature="e#3822#6272#0" expanded="true" />
+                <element signature="e#4168#6120#0" expanded="true" />
+                <element signature="e#6119#6120#0" expanded="true" />
+                <element signature="e#6271#6272#0" expanded="true" />
+                <element signature="e#6354#7009#0" expanded="true" />
+                <element signature="e#7008#7009#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,32 +91,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dialog_update_category.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_update_category.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="33" column="21" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SettingActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+            <state relative-caret-position="456">
+              <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+              <folding>
+                <element signature="e#1950#2092#0" expanded="true" />
+                <element signature="e#2091#2092#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UpdateCategoryDialog.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UpdateCategoryDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1824">
-              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="163">
+              <caret line="100" column="106" selection-start-line="100" selection-start-column="106" selection-end-line="100" selection-end-column="106" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -139,11 +134,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java">
+      <file leaf-file-name="CategoryDBHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryDBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
+            <state relative-caret-position="86">
               <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingRecyclerAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingRecyclerAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1102">
+              <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,7 +161,7 @@
       <file leaf-file-name="CategoryGridAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryGridAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
+            <state relative-caret-position="847">
               <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -2449,7 +2456,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_set_category.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/category_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/NonNull.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_update_category.xml" />
@@ -2458,9 +2464,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/EventActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/MyDialogListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryGridAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SetCategoryActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java" />
       </list>
     </option>
   </component>
@@ -2739,6 +2746,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#1950#2092#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2790,10 +2801,14 @@
         <state relative-caret-position="285">
           <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
           <folding>
-            <element signature="e#2229#4462#0" expanded="true" />
-            <element signature="e#2569#4406#0" expanded="true" />
-            <element signature="e#4405#4406#0" expanded="true" />
-            <element signature="e#4461#4462#0" expanded="true" />
+            <element signature="e#2313#2455#0" expanded="true" />
+            <element signature="e#2454#2455#0" expanded="true" />
+            <element signature="e#3822#6272#0" expanded="true" />
+            <element signature="e#4168#6120#0" expanded="true" />
+            <element signature="e#6119#6120#0" expanded="true" />
+            <element signature="e#6271#6272#0" expanded="true" />
+            <element signature="e#6354#7009#0" expanded="true" />
+            <element signature="e#7008#7009#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3036,16 +3051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingRecyclerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/Category.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -3091,13 +3096,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/MyDialogListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -3105,9 +3103,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/DBHelper.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
+        <state relative-caret-position="1102">
+          <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="100" column="106" selection-start-line="100" selection-start-column="106" selection-end-line="100" selection-end-column="106" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
           <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3117,7 +3135,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/CategoryGridAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
+        <state relative-caret-position="847">
           <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3133,23 +3151,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SetCategoryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="107" column="57" selection-start-line="107" selection-start-column="57" selection-end-line="107" selection-end-column="57" />
+        <state relative-caret-position="-1927">
+          <caret line="76" column="5" lean-forward="true" selection-start-line="67" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
           <folding>
-            <element signature="e#2229#4462#0" expanded="true" />
-            <element signature="e#2569#4406#0" expanded="true" />
-            <element signature="e#4405#4406#0" expanded="true" />
-            <element signature="e#4461#4462#0" expanded="true" />
+            <element signature="e#2313#2455#0" expanded="true" />
+            <element signature="e#2454#2455#0" expanded="true" />
+            <element signature="e#3822#6272#0" expanded="true" />
+            <element signature="e#4168#6120#0" expanded="true" />
+            <element signature="e#6119#6120#0" expanded="true" />
+            <element signature="e#6271#6272#0" expanded="true" />
+            <element signature="e#6354#7009#0" expanded="true" />
+            <element signature="e#7008#7009#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/UpdateCategoryDialog.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/msproject/myhome/mydays/SettingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="456">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1950#2092#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
           </folding>
         </state>
       </provider>

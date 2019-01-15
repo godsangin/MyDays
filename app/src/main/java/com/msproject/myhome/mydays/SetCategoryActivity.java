@@ -31,10 +31,11 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
     Context context;
     private final int DIALOG_ID = 0;
     UpdateCategoryDialog Udialog;
-    DBHelper dbHelper;
+    CategoryDBHelper dbHelper;
     CategoryGridAdapter gridAdapter;
     ArrayList<Category> categories;
     final CharSequence[] items = {"색상 변경", "삭제", "취소"};
+    MyDialogListener myDialogListener;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -47,11 +48,24 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
             getWindow().setStatusBarColor(getColor(R.color.colorTitleBar));
         }
         context = this;
+        dbHelper = new CategoryDBHelper(context, "CATEGORY.db", null, 1);
         titleBar = findViewById(R.id.title_bar);
         gridView = findViewById(R.id.category_gridview);
         fab = findViewById(R.id.fab);
-        dbHelper = new DBHelper(context, "CATEGORY.db", null, 1);
-//        dbHelper.clearDB();
+
+        backButtonEnable();
+
+        categories = initCategories();
+        gridAdapter = new CategoryGridAdapter(categories, this.context);
+        gridView.setAdapter(gridAdapter);
+
+        setMyDialogListener();
+        setGridViewLongClickListener();
+        setFabOnClickListener();
+
+    }
+
+    public void backButtonEnable(){
         ImageView backButton = titleBar.findViewById(R.id.back_bt);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +74,45 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                 finish();
             }
         });
+    }
 
-        categories = initCategories();
-        gridAdapter = new CategoryGridAdapter(categories, this.context);
-        gridView.setAdapter(gridAdapter);
+
+    public ArrayList<Category> initCategories(){
+        ArrayList<Category> categories = new ArrayList<>();
+
+        categories.add(new Category("공부", "#455678"));
+        categories.add(new Category("운동", "#fda967"));
+        categories.add(new Category("휴식", "#5f5f5f"));
+        if(dbHelper.getResult() != null){
+            categories = dbHelper.getResult();
+        }
+        return categories;
+    }
+
+    public void setMyDialogListener(){//카테고리를 설정하는 dialog에서 콜백을 받기 위한 Listener(customListener)
+        myDialogListener = new MyDialogListener() {
+            @Override
+            public void onPostClicked(Category category) {
+                dbHelper.insert(category.getCategoryName(), category.getColor());
+                gridAdapter.add(category);
+                gridAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onModifyClicked(Category category, int index) {
+                dbHelper.update(category.getCategoryName(), category.getColor());
+                gridAdapter.modify(category, index);
+                gridAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNegativeClicked() {
+
+            }
+        };
+    }
+
+    public void setGridViewLongClickListener(){//GridView의 onItemLongLickListenr.
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -79,22 +128,7 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                                         Display display = ((Activity)context).getWindowManager().getDefaultDisplay();
                                         Point size = new Point();
                                         display.getSize(size);
-                                        Udialog.setDialogListener(new MyDialogListener() {
-                                            @Override
-                                            public void onPostClicked(Category category) {
-
-                                            }
-                                            @Override
-                                            public void onModifyClicked(Category category, int index) {
-                                                dbHelper.update(category.getCategoryName(), category.getColor());
-                                                gridAdapter.modify(category, index);
-                                                gridAdapter.notifyDataSetChanged();
-                                            }
-                                            @Override
-                                            public void onNegativeClicked() {
-
-                                            }
-                                        });
+                                        Udialog.setDialogListener(myDialogListener);
                                         dialog.dismiss();
                                         Udialog.show();
                                         Udialog.setCancelable(true);
@@ -120,7 +154,9 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                 return false;
             }
         });
-        
+    }
+
+    public void setFabOnClickListener(){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,25 +164,7 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                 Display display = getWindowManager().getDefaultDisplay();
                 Point size = new Point();
                 display.getSize(size);
-                Udialog.setDialogListener(new MyDialogListener() {
-                    @Override
-                    public void onPostClicked(Category category) {
-                        dbHelper.insert(category.getCategoryName(), category.getColor());
-                        gridAdapter.add(category);
-                        gridAdapter.notifyDataSetChanged();
-
-                    }
-
-                    @Override
-                    public void onModifyClicked(Category category, int index) {
-
-                    }
-
-                    @Override
-                    public void onNegativeClicked() {
-
-                    }
-                });
+                Udialog.setDialogListener(myDialogListener);
                 Udialog.show();
                 Udialog.setCancelable(true);
                 Window window = Udialog.getWindow();
@@ -156,18 +174,6 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
                 window.setLayout(x,y);
             }
         });
-    }
-
-    public ArrayList<Category> initCategories(){
-        ArrayList<Category> categories = new ArrayList<>();
-
-        categories.add(new Category("공부", "#455678"));
-        categories.add(new Category("운동", "#fda967"));
-        categories.add(new Category("휴식", "#5f5f5f"));
-        if(dbHelper.getResult() != null){
-            categories = dbHelper.getResult();
-        }
-        return categories;
     }
 
     @Override

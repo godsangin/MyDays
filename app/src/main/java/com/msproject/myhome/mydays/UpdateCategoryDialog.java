@@ -67,7 +67,7 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
         submitButton = findViewById(R.id.submit_bt);
         cancelButton = findViewById(R.id.cancel_bt);
 
-        if(isModify){
+        if(isModify){//카테고리 수정을 통해 Dialog에 접근할 경우, 확인 버튼을 수정으로 변경, 카테고리 이름을 입력하는 TextView를 readOnly로 변경, 기본 색상을 변경 전 색상으로 초기화.
             submitButton.setText("수정");
             categoryEditText.setText(modifyCategory.getCategoryName());
             categoryEditText.setEnabled(false);
@@ -81,18 +81,16 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.submit_bt://db업데이트
+            case R.id.submit_bt://카테고리를 추가할 경우, null스트링이면 메세지 출력
                 String categoryName = categoryEditText.getText().toString();
                 if(categoryName.equals("")){
-                    Toast.makeText(context, "카테고리의 이름을 입력해주세요.", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "카테고리의 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(isModify){
-
+                if(isModify){//카테고리 수정일 경우 SetCategoryActivity로 onModifyClicked event 발생
                     dialogListener.onModifyClicked(new Category(categoryName, pickedColor), modifyIndex);
                 }
-                else{
-
+                else{//새로운 카테고리 추가일 경우 onPostClicked event 발생
                     dialogListener.onPostClicked(new Category(categoryName, pickedColor));
                 }
                 dismiss();
@@ -100,8 +98,7 @@ public class UpdateCategoryDialog extends Dialog implements View.OnClickListener
             case R.id.cancel_bt:
                 dismiss();
                 break;
-            case R.id.color_selec_bt:
-
+            case R.id.color_selec_bt://색을 변경하기 위한 view를 클릭할 경우, ColorPickerDialog 출력. SetCategoryActivity의 ColorPickerDialogListener를 통해 색의 변화를 콜백받는다.
                 ColorPickerDialog.Builder cp = ColorPickerDialog.newBuilder();
                 cp.setDialogType(ColorPickerDialog.TYPE_CUSTOM);
                 cp.setAllowPresets(false);

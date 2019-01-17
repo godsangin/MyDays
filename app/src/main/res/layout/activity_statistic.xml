@@ -9,6 +9,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:text="X"
+            android:id="@+id/exit"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:orientation="vertical">

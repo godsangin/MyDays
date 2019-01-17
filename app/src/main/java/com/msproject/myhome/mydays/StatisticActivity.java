@@ -2,16 +2,12 @@ package com.msproject.myhome.mydays;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -23,7 +19,7 @@ public class StatisticActivity extends AppCompatActivity {
 
     PieChart pieChart;
 
-    Button btn_daily, btn_weekly, btn_monthly;
+    Button btn_daily, btn_weekly, btn_monthly, btn_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +29,14 @@ public class StatisticActivity extends AppCompatActivity {
         btn_daily = (Button) findViewById(R.id.btn_daily);
         btn_weekly = (Button) findViewById(R.id.btn_weekly);
         btn_monthly = (Button) findViewById(R.id.btn_monthly);
+
+        btn_exit = findViewById(R.id.exit);
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         pieChart = (PieChart)findViewById(R.id.piechart);
 

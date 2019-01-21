@@ -92,6 +92,11 @@ public class SetCategoryActivity extends AppCompatActivity implements ColorPicke
     public void setMyDialogListener(){//카테고리를 설정하는 dialog에서 콜백을 받기 위한 Listener(customListener)
         myDialogListener = new MyDialogListener() {
             @Override
+            public void onPostClicked(Event event) {
+
+            }
+
+            @Override
             public void onPostClicked(Category category) {
                 dbHelper.insert(category.getCategoryName(), category.getColor());
                 gridAdapter.add(category);

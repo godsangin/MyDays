@@ -10,18 +10,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -30,6 +35,8 @@ import java.util.HashSet;
 public class MainActivity extends AppCompatActivity {
     ImageView menuButton;
     PieChart pieChart;
+    LinearLayout titleBar;
+
 
     ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
     ArrayList<Integer> colors = new ArrayList<>();
@@ -44,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuButton = findViewById(R.id.menu_bt);
+        titleBar = findViewById(R.id.title_bar);
+        TextView textView = titleBar.findViewById(R.id.today);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EventActivity.class);
+                startActivity(intent);
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= 21) {
             // 21 버전 이상일 때

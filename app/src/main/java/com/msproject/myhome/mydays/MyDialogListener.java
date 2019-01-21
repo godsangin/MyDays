@@ -4,4 +4,5 @@ public interface MyDialogListener {
     public void onPostClicked(Category category);
     public void onModifyClicked(Category category, int index);
     public void onNegativeClicked();
+    public void onPostClicked(Event event);
 }

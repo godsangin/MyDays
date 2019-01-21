@@ -1,21 +1,22 @@
 package com.msproject.myhome.mydays;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Day {
-    Event[] events;
+    ArrayList<Event> events;
     Date date;
 
-    public Day(Event[] events, Date date){
-        this.events = events;
+    public Day(ArrayList<Event> events, Date date){
+        events = new ArrayList<>();
         this.date = date;
     }
 
-    public Event[] getEvents() {
+    public ArrayList<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Event[] events) {
+    public void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
 
